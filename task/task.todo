@@ -1,0 +1,84 @@
+Project Setup : (5)
+-[x] Create basic html page with minor css
+-[x] running project on local web server
+-[x] Add Phaser 3 Library
+-[x] Create a Basic Phaser 3 Game Instance
+-[x] Add jsconfig to get phaser 3 types and intellisense
+
+Game Project Assets : (2)
+-[x] Download Game assets and add to project
+-[x] Show links to where assets can be found
+
+Battle System: (21)
+-[ ] Load game assets
+-[ ] Create battle scene layout
+-[ ] Create dialog menu
+-[ ] Create option menu
+-[ ] Create monster attack move list
+-[ ] handle player input
+-[ ] Code optimization - move logic to components
+-[ ] Create health component 
+-[ ] Create monster components
+-[ ] Adding basic attack logic
+-[ ] Taking damage and monster knock out
+-[ ] battle state machine
+    -[ ] What is a finite state machine
+    -[ ] review the battle states and what each one represents 
+    -[ ] implement each state
+    -[ ] add item, flee, and monster states
+-[ ] Battle scene polish
+    -[ ] text animations
+    -[ ] monster animations
+    -[ ] attack animations
+    -[ ] scene animations
+
+World Scene: (7)
+-[ ] Load level Background
+-[ ] Create Player
+-[ ] Handle Player Input
+-[ ] Camera Movement
+-[ ] Handle grid based movement
+-[ ] Handle collisions
+-[ ] Add wild monster encounter logic
+
+level Develoment With Tiled: (6)
+-[ ] Basic level design concept
+-[ ] Add collisions layer
+-[ ] Add custom types object tiled
+-[ ] Add game objects 
+-[ ] Add npcs
+-[ ] Exporting level image and JSON
+
+World Scene Part 2: (5)
+-[ ] Add interactive game objects
+-[ ] Dialog ui component
+-[ ] Add npcs
+-[ ] Add npc dialog
+-[ ] Add npc movement
+
+Title Screen: (4)
+-[ ] Create basic title screen 
+-[ ] Add options menu
+-[ ] Save & loading options
+-[ ] Connecting option data to battle scene
+
+Tools Part 1: (4)
+-[ ] Using tweakpane for testing 
+    -[ ] positioning game objects
+    -[ ] monster attacks
+    -[ ] animations
+
+Systems: (5)
+-[ ] Saving & loading data
+-[ ] Inventory
+-[ ] Picking up items
+-[ ] Viewing Monsters
+-[ ] Buildings
+
+Future Content: (6)
+-[ ] Cutscenes
+-[ ] In game events and tracking
+-[ ] Shops
+-[ ] Battle npcs
+-[ ] Monster encyclopedia
+-[ ] Monster league/gyms
