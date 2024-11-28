@@ -1,3 +1,4 @@
+import { BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS } from "../dist/assets/asset-keys.js";
 import Phaser from "../dist/lib/phaser.js";
 import { SCENE_KEYS } from "./scenes-keys.js";
 
@@ -5,24 +6,70 @@ export class PreloadScene extends Phaser.Scene {
     constructor(){
         super({
             key: SCENE_KEYS.PRELOAD_SCENE,
-            // active : true,
+   
         });
         console.log(SCENE_KEYS.PRELOAD_SCENE);
     }
 
-    init(){
-        console.log('init');
-    }
 
     preload(){
-        console.log('preload');
+        console.log(`[${PreloadScene.name}:preload] invoked`)
+
+        const monsterTamerPath = '../assets/assets/images/monster-tamer';
+        const kenneysPath = '../assets/assets/images/kenneys-assets';
+
+        // battle background
+        this.load.image(
+            BATTLE_BACKGROUND_ASSET_KEYS.FOREST,
+            `${monsterTamerPath}/battle-backgrounds/forest-background.png`
+        );
+        // battle assets
+        this.load.image(
+            BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND,
+            `${kenneysPath}/ui-space-expansion/custom-ui.png`
+        );
+
+        // health bar
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.RIGHT_CAP,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_green_right.png`
+        );
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.MIDDLE,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_green_mid.png`
+        );
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.LEFT_CAP,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_green_left.png`
+        );
+
+        // Monster assets
+        this.load.image(
+            MONSTER_ASSET_KEYS.IGUANIGNITE,
+            `${monsterTamerPath}/monsters/iguanignite.png`
+        );
+        this.load.image(
+            MONSTER_ASSET_KEYS.CARNODUSK,
+            `${monsterTamerPath}/monsters/carnodusk.png`
+        );
+        this.load.image(
+            MONSTER_ASSET_KEYS.JIVY,
+            `${monsterTamerPath}/monsters/jivy.png`
+        );
+        this.load.image(
+            MONSTER_ASSET_KEYS.PARAZOID,
+            `${monsterTamerPath}/monsters/parazoid.png`
+        );
+        this.load.image(
+            MONSTER_ASSET_KEYS.FROSTSABER,
+            `${monsterTamerPath}/monsters/frostsaber.png`
+        );
     }
 
     create(){
-        console.log('create');
+        
+        console.log(`[${PreloadScene.name}:create] invoked`)
+        this.scene.start(SCENE_KEYS.BATTLE_SCENE);
     }
 
-    update(){
-        console.log('update');
-    }
 }

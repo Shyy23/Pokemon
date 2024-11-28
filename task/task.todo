@@ -10,7 +10,7 @@ Game Project Assets : (2)
 -[x] Show links to where assets can be found
 
 Battle System: (21)
--[ ] Load game assets
+-[x] Load game assets
 -[ ] Create battle scene layout
 -[ ] Create dialog menu
 -[ ] Create option menu
