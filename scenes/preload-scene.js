@@ -64,6 +64,15 @@ export class PreloadScene extends Phaser.Scene {
             MONSTER_ASSET_KEYS.FROSTSABER,
             `${monsterTamerPath}/monsters/frostsaber.png`
         );
+        this.load.image(
+            MONSTER_ASSET_KEYS.AQUAVALOR,
+            `${monsterTamerPath}/monsters/aquavalor.png`
+        );
+        this.load.image(
+            MONSTER_ASSET_KEYS.IGNIVOLT,
+            `${monsterTamerPath}/monsters/ignivolt.png`
+        );
+
     }
 
     create(){
