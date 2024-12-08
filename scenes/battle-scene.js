@@ -1,6 +1,6 @@
 import {BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS} from "../dist/assets/asset-keys.js";
 import { Background } from "../dist/battle/background.js";
-import { BattleMonster } from "../dist/battle/monster/battle-monster.js";
+import { EnemyBattleMonster } from "../dist/battle/monster/enemy-battle-monster.js";
 import { HealthBar } from "../dist/battle/ui/health-bar.js";
 import { BattleMenu } from "../dist/battle/ui/menu/battle-menu.js";
 import { DIRECTION } from "../dist/common/direction.js";
@@ -14,7 +14,7 @@ export class BattleScene extends Phaser.Scene {
     /** @type {Phaser.Types.Input.Keyboard.CursorKeys} */
     #cursorKeys;
 
-    /** @type {BattleMonster} */
+    /** @type {EnemyBattleMonster} */
     #activeEnemyMonster;
     constructor(){
         super({
@@ -32,7 +32,7 @@ export class BattleScene extends Phaser.Scene {
         background.showForest();
 
         // render monster & player
-        this.#activeEnemyMonster = new BattleMonster({
+        this.#activeEnemyMonster = new EnemyBattleMonster({
             scene: this,
             monsterDetails: {
                 name: MONSTER_ASSET_KEYS.JIVY,
@@ -43,8 +43,7 @@ export class BattleScene extends Phaser.Scene {
                 attackIds: [],
                 baseAttack: 5
             },
-        },{x: 768, y:140}
-    );
+        });
         // this.add.image(768, 140, MONSTER_ASSET_KEYS.JIVY, 0);
         this.add.image(256, 316, MONSTER_ASSET_KEYS.FROSTSABER, 0).setFlipX(true);
 
@@ -136,6 +135,8 @@ export class BattleScene extends Phaser.Scene {
                     console.log('Animate Complete');
                 }
             });
+            this.#activeEnemyMonster.takeDamage(30);
+            console.log(this.#activeEnemyMonster.isFainted);
     }
 
     update(){
