@@ -1,22 +1,3 @@
-import Phaser from "../lib/phaser.js";
-import { SCENE_KEYS } from "../../scenes/scenes-keys.js";
-import { PreloadScene } from "../../scenes/preload-scene.js";
-import { BattleScene } from "../../scenes/battle-scene.js";
-
-const game = new Phaser.Game({
-    type: Phaser.CANVAS,
-    pixelArt: false,
-    scale: {
-        parent: 'game-container',
-        width: 1024,
-        height: 576,
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
-   
-    backgroundColor: '#222',
-});
-
-game.scene.add(SCENE_KEYS.PRELOAD_SCENE, PreloadScene);
-game.scene.add(SCENE_KEYS.BATTLE_SCENE, BattleScene);
-game.scene.start(SCENE_KEYS.PRELOAD_SCENE);
+version https://git-lfs.github.com/spec/v1
+oid sha256:845b51767b8c8d6cde14b2be2b915fccfb42b1f8548e059bc426e48d14a0e962
+size 663

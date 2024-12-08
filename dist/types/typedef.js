@@ -1,36 +1,3 @@
-import Phaser from "../lib/phaser.js";
-
-/**
- * @typedef BattleMonsterConfig
- * @type {Object}
- * @property {Phaser.Scene} scene
- * @property {Monster} monsterDetails
- */
-
-/**
- * @typedef Monster
- * @type {Object}
- * @property {string} name
- * @property {string} assetKey
- * @property {number} [assetFrame = 0]
- * @property {number} maxHp
- * @property {number} currentHp
- * @property {number} baseAttack
- * @property {number[]} attackIds
- */
-
-/**
- * @typedef Coordinate
- * @type {Object}
- * @property {number} x
- * @property {number} y
- */
-
-/**
- * @typedef Attack
- * @type {Object}
- * @property {number} id
- * @property {string} name
- * @property {string} animationName
- */
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:5b8cd87e0288d7bc716a3cbc10aa7d75d4de10f3a5aa8a5a4775b4bd00be40bc
+size 710

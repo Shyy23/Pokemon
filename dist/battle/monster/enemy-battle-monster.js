@@ -1,17 +1,3 @@
-import { BattleMonster } from "./battle-monster.js";
-
-/** @type {import("../../types/typedef").Coordinate} */
-const ENEMY_POSITION = Object.freeze({
-    x:768,
-    y:144
-});
-
-export class EnemyBattleMonster extends BattleMonster{
-    /**
-     * 
-     * @param {import("../../types/typedef").BattleMonsterConfig} config 
-     */
-    constructor(config){
-        super(config, ENEMY_POSITION);
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:870b935acc66656fa284d26e3b02392e477f2865154eb1bcaeeb8a105500afae
+size 415

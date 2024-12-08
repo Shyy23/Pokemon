@@ -1,7 +1,3 @@
-import Phaser from "../../../lib/phaser.js";
-
-/** @type {Phaser.Types.GameObjects.Text.TextStyle} */
-export const BATTLE_UI_TEXT_STYLE = Object.freeze({
-    color: 'black',
-    fontSize: '30px'
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:cd39a583aaedabebd71accc2967e1a18bc57cb92bd5d5402722d6c7b667483a4
+size 203

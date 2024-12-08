@@ -1,7 +1,3 @@
-/**
- * 
- * @param {never} _value 
- */
-export function exhaustiveGuard(_value){
-    throw new Error(`Error! reached forbidden guard function with unexpected value: ${JSON.stringify(_value)}`);
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d2a2355b700dd44d9d5592dde6c54649e8e59d556ebba2a57b93791056809fc
+size 199

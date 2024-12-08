@@ -1,23 +1,3 @@
-import { BATTLE_BACKGROUND_ASSET_KEYS } from "../assets/asset-keys.js";
-import Phaser from "../lib/phaser.js";
-export class Background{
-/** @type {Phaser.Scene} */
-#scene;
-/** @type {Phaser.GameObjects.Image} */
-#backgroundGameObject;
-
-
-/**
- * 
- * @param {Phaser.Scene} scene the Phaser 3 sceme the battle menu will be added
- */
-constructor(scene){
-    this.#scene = scene;
-
-    this.#backgroundGameObject = this.#scene.add.image(0,0, BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0).setAlpha(0);
-}
-
-showForest(){
-    this.#backgroundGameObject.setTexture(BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setAlpha(1);
-}
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:18bd72ede64b3bd63a7a85ed8da47b96c33cb4d5cb0de87558e93ad79916360e
+size 632
