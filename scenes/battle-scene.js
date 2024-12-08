@@ -1,11 +1,21 @@
-
-
 import {BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS} from "../dist/assets/asset-keys.js";
-
+import { Background } from "../dist/battle/background.js";
+import { BattleMonster } from "../dist/battle/monster/battle-monster.js";
+import { HealthBar } from "../dist/battle/ui/health-bar.js";
+import { BattleMenu } from "../dist/battle/ui/menu/battle-menu.js";
+import { DIRECTION } from "../dist/common/direction.js";
 import Phaser from "../dist/lib/phaser.js";
 import { SCENE_KEYS } from "./scenes-keys.js";
 
+
 export class BattleScene extends Phaser.Scene {
+    /** @type {BattleMenu} */
+    #battleMenu;
+    /** @type {Phaser.Types.Input.Keyboard.CursorKeys} */
+    #cursorKeys;
+
+    /** @type {BattleMonster} */
+    #activeEnemyMonster;
     constructor(){
         super({
             key: SCENE_KEYS.BATTLE_SCENE,
@@ -14,15 +24,31 @@ export class BattleScene extends Phaser.Scene {
 
 
     create(){
+        
         console.log(`[${BattleScene.name}:create] invoked`)
 
         // Create main background
-        this.add.image(0,0,BATTLE_BACKGROUND_ASSET_KEYS.FOREST).setOrigin(0);
+        const background = new Background(this);
+        background.showForest();
 
         // render monster & player
-        this.add.image(768, 140, MONSTER_ASSET_KEYS.JIVY, 0);
+        this.#activeEnemyMonster = new BattleMonster({
+            scene: this,
+            monsterDetails: {
+                name: MONSTER_ASSET_KEYS.JIVY,
+                assetKey: MONSTER_ASSET_KEYS.JIVY,
+                assetFrame: 0,
+                currentHp: 25,
+                maxHp: 25,
+                attackIds: [],
+                baseAttack: 5
+            },
+        },{x: 768, y:140}
+    );
+        // this.add.image(768, 140, MONSTER_ASSET_KEYS.JIVY, 0);
         this.add.image(256, 316, MONSTER_ASSET_KEYS.FROSTSABER, 0).setFlipX(true);
 
+        const playerHealtBar = new HealthBar(this, 34, 34); 
         // render player health bar
         const playerMonsterName = this.add.text(
             30,
@@ -35,9 +61,8 @@ export class BattleScene extends Phaser.Scene {
         this.add.container(556, 318, [
             this.add.image(0,0, BATTLE_ASSET_KEYS.HEALTH_BAR_BACKGROUND)
             .setOrigin(0),
-
             playerMonsterName,
-        this.#createHealthBar(34,34),
+        playerHealtBar.container,
         this.add.text(
             playerMonsterName.width + 35,
             23,
@@ -64,6 +89,8 @@ export class BattleScene extends Phaser.Scene {
             ]);
 
             //render enemy health 
+        // const enemyHealthBar = new HealthBar(this, 34, 34); 
+        const enemyHealthBar = this.#activeEnemyMonster._healthBar;
         const enemyMonsterName = this.add.text(
             30,
             20,
@@ -77,7 +104,7 @@ export class BattleScene extends Phaser.Scene {
             .setOrigin(0)
             .setScale(1, 0.8),
             enemyMonsterName,
-        this.#createHealthBar(34,34),
+            enemyHealthBar.container,
         this.add.text(
             enemyMonsterName.width + 35,
             23,
@@ -91,52 +118,64 @@ export class BattleScene extends Phaser.Scene {
                 'HP', {
                     color: '#FF6505',
                     fontSize: '20px',
-                    fontStyle: 'italic'
+                    fontStyle: 'italic',
+                    
                        
                 }),  
  
             ]);
 
             // render main info pane
-            this.#createMainInfoPane();
-            this.#createMainInfoSubPane();
+            this.#battleMenu = new BattleMenu(this);
+            this.#battleMenu.showMainBattleMenu();
+
+            this.#cursorKeys = this.input.keyboard.createCursorKeys();      
+            playerHealtBar.setMeterPercentageAnimated(.5, {
+                duration: 3000,
+                callback: () => {
+                    console.log('Animate Complete');
+                }
+            });
     }
 
-    #createHealthBar(x, y){
-        const scaleY = 0.7;
-        const leftCap = this.add.image(x, y, HEALTH_BAR_ASSET_KEYS.LEFT_CAP).setOrigin(0, 0.5).setScale(1, scaleY);
-        const middle = this.add.image(leftCap.x + leftCap.width, y, HEALTH_BAR_ASSET_KEYS.MIDDLE).setOrigin(0, 0.5).setScale(1, scaleY);
-        middle.displayWidth = 360;
-        const rightCap = this.add.image(middle.x + middle.displayWidth, y, HEALTH_BAR_ASSET_KEYS.RIGHT_CAP).setOrigin(0, 0.5).setScale(1, scaleY);
-        return this.add.container(x, y, [leftCap, middle, rightCap]);
+    update(){
+        const wasSpaceKeyPressed = Phaser.Input.Keyboard.JustDown(this.#cursorKeys.space);
+        const wasShiftKeyPressed = Phaser.Input.Keyboard.JustDown(this.#cursorKeys.shift);
+        if(wasSpaceKeyPressed){
+            this.#battleMenu.handlePlayerInput('OK');
+
+            // check if the player selected an attack, and update the display text
+            if(this.#battleMenu.selectedAttack === undefined){
+                return;
+            }
+            console.log(`Player Selected the following menu: ${this.#battleMenu.selectedAttack}`);
+            this.#battleMenu.hideMonsterAttackSubMenu();
+            this.#battleMenu.updateInfoPaneMessagesAndWaitingForInput(['Your Monster Attack An Enemy!'], () => {
+                this.#battleMenu.showMainBattleMenu();
+            }); 
+        }
+
+        if(wasShiftKeyPressed){
+            this.#battleMenu.handlePlayerInput('CANCEL');
+            return;
+        }
+
+        /** @type {import('../dist/common/direction.js').Direction} */
+        let selectedDirection = DIRECTION.NONE;
+        if(this.#cursorKeys.left.isDown){
+            selectedDirection = DIRECTION.LEFT;
+        } else if(this.#cursorKeys.right.isDown){
+            selectedDirection = DIRECTION.RIGHT;
+        } else if(this.#cursorKeys.up.isDown){
+            selectedDirection = DIRECTION.UP;
+        } else if(this.#cursorKeys.down.isDown){
+            selectedDirection = DIRECTION.DOWN;
+        }
+
+        if(selectedDirection !== DIRECTION.NONE){
+            this.#battleMenu.handlePlayerInput(selectedDirection);
+        }
     }
 
-    #createMainInfoPane(){
-        const rectHeight = 124;
-        const padding = 4;
-        this.add.rectangle(
-            padding, 
-            this.scale.height - rectHeight - padding,
-            this.scale.width - padding * 2,
-            rectHeight,
-            0xede4f3,
-            1)
-            .setOrigin(0)
-            .setStrokeStyle(8, 0xe4434a, 1);
-    }
-    #createMainInfoSubPane(){
-        const rectWidth = 500;
-        const rectHeight = 124;
-        this.add.rectangle(
-            0, 
-            0,
-            rectWidth,
-            rectHeight,
-            0xede4f3,
-            1)
-            .setOrigin(0)
-            .setStrokeStyle(8, 0x905ac2, 1);
 
     }
-
-}

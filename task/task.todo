@@ -11,11 +11,11 @@ Game Project Assets : (2)
 
 Battle System: (21)
 -[x] Load game assets
--[ ] Create battle scene layout
--[ ] Create dialog menu
--[ ] Create option menu
--[ ] Create monster attack move list
--[ ] handle player input
+-[x] Create battle scene layout
+-[x] Create dialog menu
+-[x] Create option menu
+-[x] Create monster attack move list
+-[x] handle player input
 -[ ] Code optimization - move logic to components
 -[ ] Create health component 
 -[ ] Create monster components

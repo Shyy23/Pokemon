@@ -1,4 +1,4 @@
-import { BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS } from "../dist/assets/asset-keys.js";
+import { BATTLE_ASSET_KEYS, BATTLE_BACKGROUND_ASSET_KEYS, HEALTH_BAR_ASSET_KEYS, MONSTER_ASSET_KEYS, UI_ASSET_KEYS } from "../dist/assets/asset-keys.js";
 import Phaser from "../dist/lib/phaser.js";
 import { SCENE_KEYS } from "./scenes-keys.js";
 
@@ -42,6 +42,18 @@ export class PreloadScene extends Phaser.Scene {
             HEALTH_BAR_ASSET_KEYS.LEFT_CAP,
             `${kenneysPath}/ui-space-expansion/barHorizontal_green_left.png`
         );
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.LEFT_CAP_SHADOW,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_shadow_left.png`
+        );
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.RIGHT_CAP_SHADOW,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_shadow_right.png`
+        );
+        this.load.image(
+            HEALTH_BAR_ASSET_KEYS.MIDDLE_SHADOW,
+            `${kenneysPath}/ui-space-expansion/barHorizontal_shadow_mid.png`
+        );
 
         // Monster assets
         this.load.image(
@@ -64,15 +76,12 @@ export class PreloadScene extends Phaser.Scene {
             MONSTER_ASSET_KEYS.FROSTSABER,
             `${monsterTamerPath}/monsters/frostsaber.png`
         );
-        this.load.image(
-            MONSTER_ASSET_KEYS.AQUAVALOR,
-            `${monsterTamerPath}/monsters/aquavalor.png`
-        );
-        this.load.image(
-            MONSTER_ASSET_KEYS.IGNIVOLT,
-            `${monsterTamerPath}/monsters/ignivolt.png`
-        );
 
+        // Ui Assets
+        this.load.image(
+            UI_ASSET_KEYS.CURSOR,
+            `${monsterTamerPath}/ui/cursor.png`
+        );
     }
 
     create(){
