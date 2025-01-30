@@ -16,18 +16,19 @@ Battle System: (21)
 -[x] Create option menu
 -[x] Create monster attack move list
 -[x] handle player input
--[ ] Code optimization - move logic to components
--[ ] Create health component 
--[ ] Create monster components
--[ ] Adding basic attack logic
--[ ] Taking damage and monster knock out
--[ ] battle state machine
-    -[ ] What is a finite state machine
-    -[ ] review the battle states and what each one represents 
-    -[ ] implement each state
-    -[ ] add item, flee, and monster states
+-[x] Code optimization - move logic to components
+-[x] Create health component 
+-[x] Create monster components
+-[x] Adding basic attack logic
+-[x] Taking damage and monster knock out
+-[x] battle state machine
+    -[x] What is a finite state machine
+    -[x] review the battle states and what each one represents 
+    -[x] implement each state
+    -[x] add item, flee, and monster states
+    -[x] Player Input Improvements
 -[ ] Battle scene polish
-    -[ ] text animations
+    -[x] text animations
     -[ ] monster animations
     -[ ] attack animations
     -[ ] scene animations
